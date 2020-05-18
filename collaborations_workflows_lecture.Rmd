@@ -1,0 +1,216 @@
+---
+title: "Workflows and best practices for collaborative coding"
+author: "Alexa Fredston"
+date: "5/26/2020"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Goals for today 
+
+Discuss how to write **really** reproducible code that enables others to:
+
+- Identify decision points in your code
+- Understand your methods
+- Regenerate your results 
+
+Do better science in less time! [Lowndes et al. 2017](https://www.nature.com/articles/s41559-017-0160)
+
+## Housekeeping and disclaimers
+
+More lecturing and less demo-ing today
+
+Using my own code as an example where possible 
+
+Please speak up or comment in the chat window
+
+I have no CS background and learned everything I know from you and from Twitter
+
+## Outline
+
+Tools, tips, and tricks for: 
+
+1. Organizing your data
+1. Coding workflows and best practices
+1. Repositories / projects / environments
+1. Project management 
+1. Collaborating across skill levels and programming languages
+
+## 1. Organizing your data
+
+Anticipate that your code and data will be published with every completed project/paper
+
+- OK: package data with its own metadata in a universal file format
+- Better: deposit data in an archival repository with metadata 
+- Best: include code to extract data from an online source
+
+*unofficial, Alexa-determined ranking*
+
+## 1.1 Data: Web scraping / APIs 
+
+*Allows others to reproduce your results directly from scripts without requiring any additional data files*
+
+R packages that allow you to communicate with servers and access data from R, often through [ropensci](https://github.com/ropensci)
+
+- [rerddap](https://github.com/ropensci/rerddap) 
+- [rfishbase](https://ropensci.org/tutorials/rfishbase_tutorial/) 
+- [rnaturalearth](https://github.com/ropensci/rnaturalearth) 
+- [rtweet](https://github.com/ropensci/rtweet)
+- Others? 
+
+Can also write your own API in R (have you done this?) 
+
+Check regularly if these are available for major datasets you use 
+
+## 1.2 Data: Depositing in archives 
+
+Forces you to organize your data and document it in a way that facilitates reproducible science
+
+- Includes using [Ecological Metadata Language](https://eml.ecoinformatics.org/)
+
+Likely to last longer than project-specific data links, repositories, or R packages 
+
+- Knowledge Network for Biocomplexity, [KNB](https://knb.ecoinformatics.org/)
+- [FigShare](https://figshare.com/)
+
+Lots of resources at NCEAS including the [Reproducible Research course](https://learning.nceas.ucsb.edu/2019-11-RRCourse/)
+
+## 1.3 Data: Packaging it yourself
+
+Use flexible file formats that don't require certain software (like .xlsx) or programming languages (.Rdata, .rds)
+
+- .csv for tabular data, .nc for spatial data 
+
+Write metadata conforming to field standards and package with the data 
+
+Consider wrapping in an [R package](http://r-pkgs.had.co.nz/data.html) (requires more maintenance, less accessible to non-R users)
+
+Try to host data at a stable link 
+
+## 2.1 Coding: script organization
+
+My philosophy:
+
+- 1 script, ~1 task (no more than one section of Methods)
+- List decision points / user choices at the top so it’s obvious what they are
+
+[A bad script](https://github.com/afredston/neus-range-edges/blob/master/scripts/analyze_edges.R) 
+
+[A better script](https://github.com/afredston/neus-range-edges/blob/master/scripts/clean_trawl_data.R)
+
+## 2.2 Coding: functional programming 
+
+Pull out complex and/or repeated operations, write them as functions, and move to "functions" folder [example](https://github.com/afredston/neus-range-edges/blob/master/functions/sfc_as_cols.R)
+
+Simpler operations can still be defined as functions within a script [example](https://github.com/afredston/neus-range-edges/blob/master/scripts/isotherms.R)
+
+[purrr](https://jennybc.github.io/purrr-tutorial/index.html) is great, but don't be afraid to write functions with for loops or apply! 
+
+## 2.3 Coding: RMarkdown
+
+Makes code much easier to annotate and visualize
+
+Pros: 
+
+- Great for describing a workflow or reporting out your findings 
+- I most frequently use this to generate PDFs and share with collaborators
+- Can streamline analysis-to-paper pipeline, if you write papers with [bookdown](https://bookdown.org/yihui/bookdown/) (anyone?) 
+
+Cons: 
+
+- Clunky to do large analyses in .Rmd scripts 
+
+## 2.4 Coding: workflow 
+
+- Try to pause coding when a task is complete 
+- Leave a to-do list for others (and yourself!) of what, if anything, still needs to happen for that script to be functional
+- pull + commit + pull + push frequently 
+- Restart R frequently (ensures you've loaded the right packages)
+
+## 3.1 Use version control
+
+To use git and prevent problems: https://happygitwithr.com/
+
+To deal with problems like merge conflicts: https://ohshitgit.com/ 
+
+## 3.2 Use projects, seriously 
+
+Every project begins with a new github repository and a new [R project](https://r4ds.had.co.nz/workflow-projects.html) filed under ~/github/repo_name 
+
+Projects allow you to:
+
+- Work safely on different scripts in different windows 
+- Develop custom environments like in Python / other languages, e.g. with [renv](https://rstudio.github.io/renv/articles/renv.html)
+
+## 3.2 Project/repository organization
+
+Organize repositories consistently
+
+- [JC's function for this purpose](https://rdrr.io/github/jcvdav/startR/src/R/create_dirs.R)
+- [My general structure](https://github.com/afredston/neus-range-edges)
+
+Describe what each script does, somewhere (I use readme)
+
+Use [here()](https://github.com/jennybc/here_here) to manage file paths 
+
+## 4.1 Project management: GitHub issues 
+
+[Github issues](https://github.com/features/project-management/) are designed for project management [example](https://github.com/pinskylab/OceanAdapt/issues)
+
+Useful whether or not everyone codes 
+
+## 4.2 Project management: "how we work"
+
+Agree on shared practices for data storage, script development, communication, etc. at the start of a project, and document them in a Google Doc, GitHub Wiki, etc. [example](https://github.com/pinskylab/how_we_work)
+
+## 5.1 Collaboration: editing other people's code
+
+## 5.2 Collaboration: different open-source programming languages
+
+Extra important to have good communication and division of tasks (see "how we work")
+
+Can still use git for version control of scripts in ~/github/repo_name (possibly from the command line)
+
+Write out and read in data in flexible formats that translate across the languages you're using 
+
+- [reticulate](https://rstudio.github.io/reticulate/) lets you run Python code from RStudio (still need to understand Python a little bit)
+- [databricks](https://databricks.com/)
+
+Other ideas? 
+
+## 5.3: Collaboration: proprietary software
+
+Many scientists feel strongly about using ArcGIS, MATLAB, etc. 
+
+Best practices about version control and data management all apply
+
+Half a reproducible project is better than none! 
+
+## 5.4 Collaboration: non R / GitHub people
+
+Most people can at least interface with a GitHub repo to view and download files, and use Issues
+
+Most people are also OK with you transitioning a project to an open reproducible workflow, if you do all the work! 
+
+- RMarkdown/Shiny to show code and results 
+- RMarkdown interface to Microsoft Word (has anyone tried this?) 
+- Google Docs > Microsoft Word 
+- People are worth more to projects than tools 
+
+Other thoughts? 
+
+## To incorporate
+
+How to get collaborators to buy in and stop emailing code back and forth 
+
+## Thanks!
+
+Other useful links:
+
+- https://rstats.wtf/  
+- https://learning.nceas.ucsb.edu/2019-11-RRCourse/
+
+Special thanks for all the great [suggestions via Twitter](https://twitter.com/AlexaLFH/status/1261633918782013440)
