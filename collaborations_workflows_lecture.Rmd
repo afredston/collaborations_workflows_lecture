@@ -9,6 +9,8 @@ output: slidy_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Who's Alexa? 
+
 ## Goals for today 
 
 Discuss how to write **really** reproducible code that enables others to:
@@ -20,6 +22,8 @@ Discuss how to write **really** reproducible code that enables others to:
 Do better science in less time! [Lowndes et al. 2017](https://www.nature.com/articles/s41559-017-0160)
 
 ## Housekeeping and disclaimers
+
+Assuming you are familiar with R, RStudio, GitHub
 
 More lecturing and less demo-ing today
 
@@ -53,17 +57,20 @@ Anticipate that your code and data will be published with every completed projec
 
 *Allows others to reproduce your results directly from scripts without requiring any additional data files*
 
-R packages that allow you to communicate with servers and access data from R, often through [ropensci](https://github.com/ropensci)
+R packages that allow you to communicate with servers and access data from R, often through ROpenSci [(recent roundup)](https://ropensci.org/blog/2020/05/19/covid-19-open-data/)
 
+Can also write your own API in R (have you done this?) 
+
+Check regularly if these are available for major datasets you use 
+
+Wrap in `ifelse(file.exists())` statements
+
+- [tidycensus](https://github.com/walkerke/tidycensus)
 - [rerddap](https://github.com/ropensci/rerddap) 
 - [rfishbase](https://ropensci.org/tutorials/rfishbase_tutorial/) 
 - [rnaturalearth](https://github.com/ropensci/rnaturalearth) 
 - [rtweet](https://github.com/ropensci/rtweet)
 - Others? 
-
-Can also write your own API in R (have you done this?) 
-
-Check regularly if these are available for major datasets you use 
 
 ## 1.2 Data: Depositing in archives 
 
@@ -143,7 +150,7 @@ Every project begins with a new github repository and a new [R project](https://
 Projects allow you to:
 
 - Work safely on different scripts in different windows 
-- Develop custom environments like in Python / other languages, e.g. with [renv](https://rstudio.github.io/renv/articles/renv.html)
+- Develop custom environments (deal with versioning issues), e.g. with [renv](https://rstudio.github.io/renv/articles/renv.html)
 
 ## 3.2 Project/repository organization
 
@@ -152,7 +159,7 @@ Organize repositories consistently
 - [JC's function for this purpose](https://rdrr.io/github/jcvdav/startR/src/R/create_dirs.R)
 - [My general structure](https://github.com/afredston/neus-range-edges)
 
-Describe what each script does, somewhere (I use readme)
+Describe what each script does, somewhere (I use readme.md)
 
 Use [here()](https://github.com/jennybc/here_here) to manage file paths 
 
@@ -191,10 +198,14 @@ Half a reproducible project is better than none!
 
 ## 5.4 Collaboration: non R / GitHub people
 
-Most people can at least interface with a GitHub repo to view and download files, and use Issues
+For collaborators who code, but aren't following best practices: 
 
-Most people are also OK with you transitioning a project to an open reproducible workflow, if you do all the work! 
+- [workflowr](https://jdblischak.github.io/workflowr/articles/wflow-01-getting-started.html)
+- Offer to help set up and maintain reproducible workflow for them 
 
+For collaborators who don't really code: 
+
+- Use GitHub for communication (Issues) and sharing data and figures  
 - RMarkdown/Shiny to show code and results 
 - RMarkdown interface to Microsoft Word (has anyone tried this?) 
 - Google Docs > Microsoft Word 
@@ -210,7 +221,9 @@ How to get collaborators to buy in and stop emailing code back and forth
 
 Other useful links:
 
+- https://opensource.guide/ 
 - https://rstats.wtf/  
 - https://learning.nceas.ucsb.edu/2019-11-RRCourse/
+- https://r4ds.had.co.nz/workflow-projects.html
 
 Special thanks for all the great [suggestions via Twitter](https://twitter.com/AlexaLFH/status/1261633918782013440)
