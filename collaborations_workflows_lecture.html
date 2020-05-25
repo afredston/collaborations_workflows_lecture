@@ -418,8 +418,10 @@ Alexa Fredston
 <li>OK: package data with its own metadata in a universal file format</li>
 <li>Better: deposit data in an archival repository with metadata</li>
 <li>Best: include code to extract data from an online source</li>
+<li><strong>Divine: do all three!</strong></li>
 </ul>
 <p><em>unofficial, Alexa-determined ranking</em></p>
+<p><em>From a real software engineer: “Much of the analysis I’ve done had a script to pull down the original data, transformed and stored it in a canonical format alongside the code (if small) and/or stored it somewhere long term to mirror. That way if the original went down the code wouldn’t break.”</em></p>
 </div>
 <div id="data-web-scraping-apis" class="slide section level2">
 <h1>1.1 Data: Web scraping / APIs</h1>
@@ -452,12 +454,15 @@ Alexa Fredston
 </div>
 <div id="data-packaging-it-yourself" class="slide section level2">
 <h1>1.3 Data: Packaging it yourself</h1>
-<p>Use flexible file formats that don’t require certain software (like .xlsx) or programming languages (.Rdata, .rds)</p>
+<p>Use flexible file formats that don’t require certain software (like .xlsx*) or programming languages (.Rdata, .rds)</p>
 <ul>
 <li>.csv for tabular data, .nc for spatial data</li>
 </ul>
 <p>Write metadata conforming to field standards and package with the data</p>
 <p>Consider wrapping in an <a href="http://r-pkgs.had.co.nz/data.html">R package</a> (requires more maintenance, less accessible to non-R users)</p>
+<ul>
+<li>Although apparently .xlsx files are really just made up of .xml files that preserve data types!</li>
+</ul>
 <p>Try to host data at a stable link</p>
 </div>
 <div id="coding-script-organization" class="slide section level2">
@@ -470,11 +475,17 @@ Alexa Fredston
 <p><a href="https://github.com/afredston/neus-range-edges/blob/master/scripts/analyze_edges.R">A bad script</a></p>
 <p><a href="https://github.com/afredston/neus-range-edges/blob/master/scripts/clean_trawl_data.R">A better script</a></p>
 </div>
-<div id="coding-functional-programming" class="slide section level2">
-<h1>2.2 Coding: functional programming</h1>
-<p>Pull out complex and/or repeated operations, write them as functions, and move to “functions” folder <a href="https://github.com/afredston/neus-range-edges/blob/master/functions/sfc_as_cols.R">example</a></p>
-<p>Simpler operations can still be defined as functions within a script <a href="https://github.com/afredston/neus-range-edges/blob/master/scripts/isotherms.R">example</a></p>
-<p><a href="https://jennybc.github.io/purrr-tutorial/index.html">purrr</a> is great, but don’t be afraid to write functions with for loops or apply!</p>
+<div id="coding-dont-repeat-yourself" class="slide section level2">
+<h1>2.2 Coding: don’t repeat yourself</h1>
+<p>Try to spot patterns (operations you perform over and over) and pull out into functions</p>
+<ul>
+<li>Data import (can iterate over list of file names)</li>
+<li>Data cleaning/tidying</li>
+<li>Applying many models (can vary data, model, or both)</li>
+<li>Generating and saving plots</li>
+</ul>
+<p>Simple functions can be defined <a href="https://github.com/afredston/neus-range-edges/blob/master/scripts/isotherms.R">within a script</a>, and complex functions / functions used over many scripts can live in <a href="https://github.com/afredston/neus-range-edges/blob/master/functions/sfc_as_cols.R">a “functions” folder</a></p>
+<p>Apply your functions using <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">apply</a>, <a href="https://jennybc.github.io/purrr-tutorial/index.html">purrr</a>, or for loops</p>
 </div>
 <div id="coding-rmarkdown" class="slide section level2">
 <h1>2.3 Coding: RMarkdown</h1>
@@ -521,10 +532,7 @@ Alexa Fredston
 <li><a href="https://github.com/afredston/neus-range-edges">My general structure</a></li>
 </ul>
 <p>Describe what each script does, somewhere (I use readme.md)</p>
-<p>Use <a href="https://github.com/jennybc/here_here">here()</a> to manage file paths</p>
-</div>
-<div id="project-management-github-issues" class="slide section level2">
-<h1>4.1 Project management: GitHub issues</h1>
+<p>Use <a href="https://github.com/jennybc/here_here">here()</a> to manage file paths ## 4.1 Project management: GitHub issues</p>
 <p><a href="https://github.com/features/project-management/">Github issues</a> are designed for project management <a href="https://github.com/pinskylab/OceanAdapt/issues">example</a></p>
 <p>Useful whether or not everyone codes</p>
 </div>
@@ -534,6 +542,10 @@ Alexa Fredston
 </div>
 <div id="collaboration-editing-other-peoples-code" class="slide section level2">
 <h1>5.1 Collaboration: editing other people’s code</h1>
+<p>Same as editing writing: find out what kind of feedback they want, be constructive, and be nice</p>
+<p>Check if they have a <code>contributing.md</code> or “how we work” document</p>
+<p>Fix bugs if you see any</p>
+<p>Phrase code review comments / pull requests as questions: did you consider ____? Do you think it would be more readable if we moved ____? Does changing ____ to make the script faster make the extra 5 lines of code worth it?</p>
 </div>
 <div id="collaboration-different-open-source-programming-languages" class="slide section level2">
 <h1>5.2 Collaboration: different open-source programming languages</h1>
@@ -570,9 +582,10 @@ Alexa Fredston
 </ul>
 <p>Other thoughts?</p>
 </div>
-<div id="to-incorporate" class="slide section level2">
-<h1>To incorporate</h1>
-<p>How to get collaborators to buy in and stop emailing code back and forth</p>
+<div id="questions-i-couldnt-answer" class="slide section level2">
+<h1>Questions I couldn’t answer</h1>
+<p>How to get collaborators to stop emailing code back and forth</p>
+<p>Any other questions?</p>
 </div>
 <div id="thanks" class="slide section level2">
 <h1>Thanks!</h1>

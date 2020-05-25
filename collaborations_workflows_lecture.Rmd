@@ -50,8 +50,11 @@ Anticipate that your code and data will be published with every completed projec
 - OK: package data with its own metadata in a universal file format
 - Better: deposit data in an archival repository with metadata 
 - Best: include code to extract data from an online source
+- **Divine: do all three!** 
 
 *unofficial, Alexa-determined ranking*
+
+*From a real software engineer: "Much of the analysis I've done had a script to pull down the original data, transformed and stored it in a canonical format alongside the code (if small) and/or stored it somewhere long term to mirror. That way if the original went down the code wouldn't break."* 
 
 ## 1.1 Data: Web scraping / APIs 
 
@@ -87,13 +90,15 @@ Lots of resources at NCEAS including the [Reproducible Research course](https://
 
 ## 1.3 Data: Packaging it yourself
 
-Use flexible file formats that don't require certain software (like .xlsx) or programming languages (.Rdata, .rds)
+Use flexible file formats that don't require certain software (like .xlsx*) or programming languages (.Rdata, .rds)
 
 - .csv for tabular data, .nc for spatial data 
 
 Write metadata conforming to field standards and package with the data 
 
 Consider wrapping in an [R package](http://r-pkgs.had.co.nz/data.html) (requires more maintenance, less accessible to non-R users)
+
+* Although apparently .xlsx files are really just made up of .xml files that preserve data types!
 
 Try to host data at a stable link 
 
@@ -108,13 +113,18 @@ My philosophy:
 
 [A better script](https://github.com/afredston/neus-range-edges/blob/master/scripts/clean_trawl_data.R)
 
-## 2.2 Coding: functional programming 
+## 2.2 Coding: don't repeat yourself 
 
-Pull out complex and/or repeated operations, write them as functions, and move to "functions" folder [example](https://github.com/afredston/neus-range-edges/blob/master/functions/sfc_as_cols.R)
+Try to spot patterns (operations you perform over and over) and pull out into functions
 
-Simpler operations can still be defined as functions within a script [example](https://github.com/afredston/neus-range-edges/blob/master/scripts/isotherms.R)
+- Data import (can iterate over list of file names)
+- Data cleaning/tidying 
+- Applying many models (can vary data, model, or both)
+- Generating and saving plots
 
-[purrr](https://jennybc.github.io/purrr-tutorial/index.html) is great, but don't be afraid to write functions with for loops or apply! 
+Simple functions can be defined [within a script](https://github.com/afredston/neus-range-edges/blob/master/scripts/isotherms.R), and complex functions / functions used over many scripts can live in [a "functions" folder](https://github.com/afredston/neus-range-edges/blob/master/functions/sfc_as_cols.R)
+
+Apply your functions using [apply](https://www.datacamp.com/community/tutorials/r-tutorial-apply-family), [purrr](https://jennybc.github.io/purrr-tutorial/index.html), or for loops  
 
 ## 2.3 Coding: RMarkdown
 
@@ -162,7 +172,6 @@ Organize repositories consistently
 Describe what each script does, somewhere (I use readme.md)
 
 Use [here()](https://github.com/jennybc/here_here) to manage file paths 
-
 ## 4.1 Project management: GitHub issues 
 
 [Github issues](https://github.com/features/project-management/) are designed for project management [example](https://github.com/pinskylab/OceanAdapt/issues)
@@ -174,6 +183,14 @@ Useful whether or not everyone codes
 Agree on shared practices for data storage, script development, communication, etc. at the start of a project, and document them in a Google Doc, GitHub Wiki, etc. [example](https://github.com/pinskylab/how_we_work)
 
 ## 5.1 Collaboration: editing other people's code
+
+Same as editing writing: find out what kind of feedback they want, be constructive, and be nice 
+
+Check if they have a `contributing.md` or "how we work" document
+
+Fix bugs if you see any
+
+Phrase code review comments / pull requests as questions: did you consider ____? Do you think it would be more readable if we moved ____? Does changing ____ to make the script faster make the extra 5 lines of code worth it?  
 
 ## 5.2 Collaboration: different open-source programming languages
 
@@ -213,9 +230,11 @@ For collaborators who don't really code:
 
 Other thoughts? 
 
-## To incorporate
+## Questions I couldn't answer
 
-How to get collaborators to buy in and stop emailing code back and forth 
+How to get collaborators to stop emailing code back and forth 
+
+Any other questions? 
 
 ## Thanks!
 
