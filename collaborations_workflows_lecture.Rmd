@@ -232,6 +232,8 @@ Other thoughts?
 
 ## Questions I couldn't answer
 
+How to get collaborators who operate on their own machine/server to share code and data
+
 How to get collaborators to stop emailing code back and forth 
 
 Any other questions? 
