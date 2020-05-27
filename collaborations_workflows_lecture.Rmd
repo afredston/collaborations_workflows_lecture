@@ -162,7 +162,7 @@ Projects allow you to:
 - Work safely on different scripts in different windows 
 - Develop custom environments (deal with versioning issues), e.g. with [renv](https://rstudio.github.io/renv/articles/renv.html)
 
-## 3.2 Project/repository organization
+## 3.3 Project/repository organization
 
 Organize repositories consistently
 
@@ -172,6 +172,7 @@ Organize repositories consistently
 Describe what each script does, somewhere (I use readme.md)
 
 Use [here()](https://github.com/jennybc/here_here) to manage file paths 
+
 ## 4.1 Project management: GitHub issues 
 
 [Github issues](https://github.com/features/project-management/) are designed for project management [example](https://github.com/pinskylab/OceanAdapt/issues)
